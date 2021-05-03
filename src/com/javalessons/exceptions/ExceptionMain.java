@@ -1,4 +1,4 @@
-package com.javalessons.exceprions;
+package com.javalessons.exceptions;
 
 import java.util.Scanner;
 
