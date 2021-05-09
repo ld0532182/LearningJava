@@ -3,7 +3,7 @@ package com.javalessons.homeworkpoker;
 import java.util.Arrays;
 import java.util.List;
 
-final class Card implements Comparable<Card>{
+final class Card implements Comparable<Card> {
 
 
     public enum Face {
@@ -48,17 +48,20 @@ final class Card implements Comparable<Card>{
 
     @Override
     public String toString() {
-        return "Face = "+ face.abbr + " Suit = " + suit.abbr;
+        return "Face = " + face.abbr + " Suit = " + suit.abbr;
 
     }
+
     @Override
     public int compareTo(Card that) {
         Face[] arrFaces = Face.values();
         List<Face> faces = Arrays.asList(arrFaces);
-        if(faces.indexOf(this.face) < faces.indexOf(that.face)){
+        if (faces.indexOf(this.face) < faces.indexOf(that.face)) {
             return -1;
         } else if (faces.indexOf(this.face) > faces.indexOf(that.face)) {
             return 1;
+        } else if (faces.indexOf(this.face) == faces.indexOf(that.face)) {
+            return this.suit.compareTo(that.suit);
         }
         return 0;
     }
