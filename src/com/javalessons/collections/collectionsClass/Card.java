@@ -3,7 +3,7 @@ package com.javalessons.collections.collectionsClass;
 import java.util.Arrays;
 import java.util.List;
 
-public class Card implements Comparable<Card> {
+class Card implements Comparable<Card> {
 
 
     public enum Face {Ace, Deuce, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King}
@@ -34,7 +34,7 @@ public class Card implements Comparable<Card> {
     public int compareTo(Card card) {
         Face[] arrFaces = Face.values();
         List<Face> faces = Arrays.asList(arrFaces);
-        if(faces.indexOf(this.face) < faces.indexOf(card.face)) {
+        if (faces.indexOf(this.face) < faces.indexOf(card.face)) {
             return -1;
         } else if (faces.indexOf(this.face) > faces.indexOf(card.face)) {
             return 1;
