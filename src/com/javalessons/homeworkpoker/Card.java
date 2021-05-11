@@ -8,14 +8,16 @@ final class Card implements Comparable<Card> {
 
     public enum Face {
 
-        TWO("2"), THREE("3"), FOUR("4"), FIVE("5"), SIX("6"),
-        SEVEN("7"), EIGHT("8"), NINE("9"), TEN("10"),
-        JACK("Jack"), QUEEN("Queen"), KING("King"), ACE("Ace");
+        TWO("2", 1), THREE("3", 2), FOUR("4", 3), FIVE("5", 4), SIX("6", 5),
+        SEVEN("7", 6), EIGHT("8", 7), NINE("9", 8), TEN("10", 9),
+        JACK("Jack", 10), QUEEN("Queen", 11), KING("King", 12), ACE("Ace", 13);
 
         String abbr;
+        int rank;
 
-        Face(String abbr) {
+        Face(String abbr, int rank) {
             this.abbr = abbr;
+            this.rank = rank;
         }
     }
 
@@ -40,6 +42,10 @@ final class Card implements Comparable<Card> {
 
     public Face getFace() {
         return face;
+    }
+
+    public int getRank(){
+        return face.rank;
     }
 
     public Suit getSuit() {

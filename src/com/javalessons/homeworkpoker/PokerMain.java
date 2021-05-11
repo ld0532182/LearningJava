@@ -12,7 +12,7 @@ public class PokerMain {
         String[] formattedInput;
         formattedInput = getFormatString();
         Hand hand1 = new Hand(formattedInput, deck);
-        System.out.println(hand1.getHandCombination());
+        System.out.println(hand1);
 
         /*
         formattedInput = getFormatString();
