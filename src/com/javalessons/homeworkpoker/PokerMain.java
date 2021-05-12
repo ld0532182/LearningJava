@@ -2,7 +2,16 @@ package com.javalessons.homeworkpoker;
 
 import java.util.Scanner;
 import java.util.TreeSet;
-
+/** Этот код создает колоду, выдает карты в руки игроков и считает наибольшую по ценности комбинацию карт.
+ * Первым делом создается колодка объектов "Card", с помощью класса "Deck". Сама колода представляет из себя HashMap,
+ * где ключем выступает строка формата "XY", где X- тип карты, а Y - ее масть, прим: 2H - двойка червей.
+ * !ошибка, возникающая в случае выбора игроком двух одинаковых карт не обрабатываетя!
+ * После создания колоды предлагается ввести строку с пятью ключами карт (функция "getFormatString").
+ * Конструктор класса Hand присваивает игроку имя и формирует список карт. Класс Card имплементирует Comparable,
+ * поэтому все сортируются по возрастанию.
+ * Также конструктор Hand определяет ценность руки с помощью метода "defineHandCombination".
+ * После инициализации первой и второй руки, производится вычисление наибольшей комбинации и имя победителя выводится
+ * в консоль */
 public class PokerMain {
     static Scanner scanner = new Scanner(System.in);
 
@@ -11,18 +20,13 @@ public class PokerMain {
 
         String[] formattedInput;
         formattedInput = getFormatString();
-        Hand hand1 = new Hand(formattedInput, deck);
-        System.out.println(hand1);
-
-        /*
+        Hand hand1 = new Hand("Biba", formattedInput, deck);
         formattedInput = getFormatString();
-        Hand hand2 = new Hand(formattedInput, deck);
-        TreeSet<Hand> hands= new TreeSet<Hand>();
-        hands.add(hand1);
-        hands.add(hand2);
-*/
-
-
+        Hand hand2 = new Hand("Boba", formattedInput, deck);
+        TreeSet<Hand> allHands = new TreeSet<Hand>();
+        allHands.add(hand1);
+        allHands.add(hand2);
+        System.out.println(allHands.last());
     }
 
     private static String[] getFormatString() {
@@ -34,9 +38,5 @@ public class PokerMain {
             formattedInput = input.split(" ");
         } while (formattedInput.length != 5);
         return formattedInput;
-    }
-
-    private static void chooseWinner(TreeSet<Hand> hand) {
-
     }
 }

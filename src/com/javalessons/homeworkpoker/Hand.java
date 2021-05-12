@@ -1,14 +1,23 @@
 package com.javalessons.homeworkpoker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Objects;
 
 final class Hand implements Comparable<Hand> {
 
     private enum Combinations {
-        HIGH_CARD, ONE_PAIR, TWO_PAIR, THREE_OF_A_KIND, STRAIGHT,
+        HIGH_CARD(1), ONE_PAIR(2), TWO_PAIR(3), THREE_OF_A_KIND(4),
+        STRAIGHT(5), FLUSH(6), FULL_HOUSE(7), FOUR_OF_A_KIND(8),
+        STRAIGHT_FLUSH(9), ROYAL_FLUSH(10);
 
-        FLUSH, FULL_HOUSE, FOUR_OF_A_KIND, STRAIGHT_FLUSH, ROYAL_FLUSH
+        int combRank;
+
+        Combinations(int combRank) {
+            this.combRank = combRank;
+        }
+
     }
 
     Card.Face[] arrFaces = Card.Face.values();
@@ -17,7 +26,12 @@ final class Hand implements Comparable<Hand> {
 
     ArrayList<Card> handCards = new ArrayList<Card>();
 
-    public Hand(String[] cards, Deck deck) {
+    private final String playerName;
+/** Конструктор класса Hand присваивает игроку имя и формирует список карт. Класс Card имплементирует Comparable,
+ * поэтому все сортируются по возрастанию.
+ * Также конструктор Hand определяет ценность руки с помощью метода "defineHandCombination". */
+    public Hand(String playerName, String[] cards, Deck deck) {
+        this.playerName = playerName;
         for (int i = 0; i < 5; i++) {
             this.handCards.add(deck.deckMap.remove(cards[i]));
         }
@@ -25,7 +39,9 @@ final class Hand implements Comparable<Hand> {
         defineHandCombination();
     }
 
-/** У STRAIGHT_FLUSH и STRAIGHT не добавлено сравнение, при котором учавствует туз в качестве начинающего комбинацию.*/
+    /**
+     * У STRAIGHT_FLUSH и STRAIGHT не добавлено сравнение, при котором учавствует туз в качестве начинающего комбинацию.
+     */
     private void defineHandCombination() {
         Card card1 = this.handCards.get(0);
         Card card2 = this.handCards.get(1);
@@ -54,7 +70,6 @@ final class Hand implements Comparable<Hand> {
             handCombination = Combinations.ONE_PAIR;
         } else {
             handCombination = Combinations.HIGH_CARD;
-            System.out.println("High card is "+handCards.get(4).getFace().abbr);
         }
 
     }
@@ -63,13 +78,23 @@ final class Hand implements Comparable<Hand> {
         return handCombination;
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
     @Override
     public String toString() {
-        return "Your combination is " + handCombination;
+        return "Winner is "+playerName+" with combination "+handCombination;
     }
 
     @Override
     public int compareTo(Hand otherHand) {
+        if (this.handCombination.combRank < otherHand.handCombination.combRank) {
+            return -1;
+        }
+        if (this.handCombination.combRank > otherHand.handCombination.combRank) {
+            return 1;
+        }
         return 0;
     }
 
@@ -134,6 +159,21 @@ final class Hand implements Comparable<Hand> {
                 (handCards.get(3).getRank() == handCards.get(4).getRank()));
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hand hand = (Hand) o;
+        return Arrays.equals(arrFaces, hand.arrFaces) && handCombination == hand.handCombination && Objects.equals(handCards, hand.handCards);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(handCombination, handCards);
+        result = 31 * result + Arrays.hashCode(arrFaces);
+        return result;
+    }
 }
 
 
