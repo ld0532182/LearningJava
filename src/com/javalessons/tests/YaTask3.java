@@ -1,7 +1,7 @@
 package com.javalessons.tests;
 
 import java.util.Scanner;
-
+/** Требуется сложить два числа из стандартного потока ввода*/
 public class YaTask3 {
 
     public static void main(String[] args) {

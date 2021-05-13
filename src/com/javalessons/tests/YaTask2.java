@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
-
+/** Требуется найти в бинарном векторе самую длинную последовательность единиц и вывести её длину.*/
 public class YaTask2 {
     public static void main(String[] args) throws InterruptedException, IOException {
         LinkedList<String> listStr = new LinkedList<>();
