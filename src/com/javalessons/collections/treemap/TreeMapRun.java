@@ -10,10 +10,9 @@ public class TreeMapRun {
     public static void main(String[] args) {
         NavigableMap<AverageStudentGrade, Set<SubjectGrade>> studMap = createGrades();
         printGrades(studMap);
-
     }
 
-    private static NavigableMap<AverageStudentGrade, Set<SubjectGrade>> createGrades() {
+    public static NavigableMap<AverageStudentGrade, Set<SubjectGrade>> createGrades() {
 
         Set<SubjectGrade> student1 = new HashSet<>();
         student1.add(new SubjectGrade("Math", 89));

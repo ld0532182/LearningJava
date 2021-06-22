@@ -1,8 +1,9 @@
 package com.javalessons.collections.treemap;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class SubjectGrade {
+public class SubjectGrade implements Serializable {
 
     private final String subject;
     private final int grade;
@@ -32,5 +33,13 @@ public class SubjectGrade {
     @Override
     public int hashCode() {
         return Objects.hash(subject, grade);
+    }
+
+    @Override
+    public String toString() {
+        return "SubjectGrade{" +
+                "subject='" + subject + '\'' +
+                ", grade=" + grade +
+                '}';
     }
 }
